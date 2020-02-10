@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+void pop1(int value,int top1);
+void pop2(int value,int top2);
+void push1(int value, int arr[],int top1);
+void push2(int value, int arr[],int top2);
+
+
+
+int main()
+{
+	int *arr,N,numb_of_operation,M,i,optarr[100],stackarr[100],indexarr[100];
+	
+int	top2= N;
+int	top1=-1;
+
+	scanf("%d",&N);
+	arr=(int *)malloc(N*sizeof(int));
+
+	scanf("%d",&numb_of_operation);
+	M=numb_of_operation;
+    for(i=1;i<M;i++)
+        scanf("%d %d %d\n",&optarr[i],&stackarr[i],&indexarr[i]);
+    for(i=1;i<M;i++)
+      {
+		if((stackarr[i]==1)&&(optarr[i]==1))
+            push1(indexarr[i],arr,top1);
+        if((stackarr[i]==1)&&(optarr[i]==2))
+            pop1(indexarr[i],top1);
+        if((stackarr[i]==2)&&(optarr[i]==1))
+            push2(indexarr[i],arr,top2);
+        if((stackarr[i]==2)&&(optarr[i]==2))
+            pop2(indexarr[i],top2);
+        }
+     for(i=0;i<=top1;i++)
+       printf("%d\n",*(arr+i));
+       printf("\\\\");
+    for(i=N;i<=top2;i--)  
+       printf("%d\n",*(arr+i));  
+    	getch();
+}
+void pop1(int value,int top1)
+{
+	top1=top1-1;
+}
+void pop2(int value,int top2)
+{
+	top2=top2+1;
+}
+void push1(int value,int arr[],int top1)
+{
+	arr[++top1]=value;
+}
+void push2(int value,int arr[],int top2)
+{
+	arr[top2--]=value;
+}
